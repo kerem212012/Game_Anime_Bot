@@ -1,9 +1,11 @@
 import os
 import random
+import sys
 
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', '../quiz_bot.settings')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quiz_bot.settings')
 django.setup()
 
 import telebot
