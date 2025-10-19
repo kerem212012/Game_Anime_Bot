@@ -121,7 +121,7 @@ def callback_handler(call):
         if call.data.split("|", 1)[1] == "r_admin":
             for user in CustomUser.objects.filter(is_staff=False,admin=True):
                 btn = types.InlineKeyboardButton(text=user.first_name,
-                                                 callback_data=f"{call.data.split("|", 1)[1]}|{user.tg_id}")
+                                                 callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
                 markup.row(btn)
         elif call.data.split("|", 1)[1] == "spam_owner" or call.data.split("|", 1)[1] == "r_owner":
             for user in CustomUser.objects.filter(is_staff=False,owner=True):
