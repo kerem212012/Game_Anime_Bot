@@ -3,7 +3,7 @@ import random
 
 import django
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quiz_bot.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '../quiz_bot.settings')
 django.setup()
 
 import telebot
