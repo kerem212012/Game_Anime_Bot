@@ -129,16 +129,16 @@ def callback_handler(call):
                     pass
                 else:
                     btn = types.InlineKeyboardButton(text=user.first_name,
-                                                     callback_data=f"{call.data.split("|", 1)[1]}|{user.tg_id}")
+                                                     callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
                     markup.row(btn)
         elif call.data.split("|", 1)[1] == "reset" or call.data.split("|", 1)[1] == "reset_c" or call.data.split("|", 1)[1] == "reset_w":
             for user in CustomUser.objects.filter(is_staff=False):
                 if user.tg_id == str(call.message.chat.id):
                     btn = types.InlineKeyboardButton(text="You",
-                                                     callback_data=f"{call.data.split("|", 1)[1]}|{user.tg_id}")
+                                                     callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
                 else:
                     btn = types.InlineKeyboardButton(text=user.first_name,
-                                                     callback_data=f"{call.data.split("|", 1)[1]}|{user.tg_id}")
+                                                     callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
                 markup.row(btn)
         else:
             for user in CustomUser.objects.filter(is_staff=False,owner=False):
@@ -146,7 +146,7 @@ def callback_handler(call):
                     pass
                 else:
                     btn = types.InlineKeyboardButton(text=user.first_name,
-                                                     callback_data=f"{call.data.split("|", 1)[1]}|{user.tg_id}")
+                                                     callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
                     markup.row(btn)
         bot.send_message(call.message.chat.id, "Choose someone:", reply_markup=markup)
     if call.data == "start":
