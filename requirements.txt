@@ -1,0 +1,4 @@
+Django==5.2.7
+environs==14.3.0
+pyTelegramBotAPI==4.29.1
+requests==2.32.5
