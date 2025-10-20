@@ -109,10 +109,12 @@ def callback_handler(call):
             add_owner_btn = types.InlineKeyboardButton(text="Add Owner", callback_data=f"list|add_owner")
             spam_owner_btn = types.InlineKeyboardButton(text="Spam Owner", callback_data=f"list|spam_owner")
             r_owner_btn = types.InlineKeyboardButton(text="Remove Owner", callback_data=f"list|r_owner")
+            add_admin_btn = types.InlineKeyboardButton(text="Add Admin", callback_data=f"list|add_admin")
             markup.row(r_owner_btn)
             markup.row(spam_owner_btn)
             markup.row(add_owner_btn)
             markup.row(r_admin_btn)
+            markup.row(add_admin_btn)
         markup.row(reset_btn)
         markup.row(wrong_btn)
         markup.row(correct_btn)
@@ -120,11 +122,14 @@ def callback_handler(call):
         bot.send_message(call.message.chat.id, "Choose something:", reply_markup=markup)
     if call.data.split("|", 1)[0] == "list" and (CustomUser.objects.get(tg_id=call.message.chat.id).admin or CustomUser.objects.get(tg_id=call.message.chat.id).owner):
         markup = types.InlineKeyboardMarkup()
-        if call.data.split("|", 1)[1] == "r_admin":
+        if call.data.split("|", 1)[1] == "r_admin" or call.data.split("|", 1)[1] == "add_admin":
             for user in CustomUser.objects.filter(is_staff=False,admin=True):
-                btn = types.InlineKeyboardButton(text=user.first_name,
-                                                 callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
-                markup.row(btn)
+                if user.tg_id == call.message.chat.id:
+                    pass
+                else:
+                    btn = types.InlineKeyboardButton(text=user.first_name,
+                                                     callback_data=f"{call.data.split('|', 1)[1]}|{user.tg_id}")
+                    markup.row(btn)
         elif call.data.split("|", 1)[1] == "spam_owner" or call.data.split("|", 1)[1] == "r_owner":
             for user in CustomUser.objects.filter(is_staff=False,owner=True):
                 if user.tg_id == str(call.message.chat.id):
@@ -246,4 +251,10 @@ def callback_handler(call):
         bot.send_message(call.message.chat.id, text="Quiz Bot\n"
                                                     "Quizes are about Anime but later in Beta i will add more and more question(we have 25 now)\n"
                                                     "We have admin panel you need code from owner and after write /start!")
+    if call.data.split("|", 1)[0] == "add_admin":
+        user = CustomUser.objects.get(tg_id=call.data.split("|", 1)[1])
+        user.admin = True
+        user.save()
+        bot.send_message(call.message.chat.id, text=f"{user.first_name} Admin was added!")
+        bot.send_message(call.data.split("|", 1)[1], text="You added to Admin!")
 bot.infinity_polling()
