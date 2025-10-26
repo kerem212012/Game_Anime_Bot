@@ -195,6 +195,7 @@ WantedBy=multi-user.target
 
 Then lets start it:
 ```bash
+systemctl reload-daemon
 systemctl enable name_django.service
 systemctl enable name_tg.service
 systemctl start name_django.service
