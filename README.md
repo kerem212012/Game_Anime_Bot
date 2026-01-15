@@ -196,10 +196,10 @@ WantedBy=multi-user.target
 Then lets start it:
 ```bash
 systemctl daemon-reload
-systemctl enable name_django.service
-systemctl enable name_tg.service
-systemctl start name_django.service
-systemctl start name_tg.service
+systemctl enable quiz_django.service
+systemctl enable quiz_tg.service
+systemctl start quiz_django.service
+systemctl start quiz_tg.service
 ```
 
 ## SUBSCRIBE

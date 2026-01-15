@@ -10,8 +10,9 @@ django.setup()
 
 import telebot
 from environs import Env
-from quiz.models import *
 from telebot import types
+
+from quiz.models import *
 
 env = Env()
 env.read_env()

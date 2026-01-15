@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from quiz.models import CustomUser, QuizDifficulty, QuizType, Quiz
+from quiz.models import CustomUser, Quiz, QuizDifficulty, QuizType
 
 
 @admin.register(CustomUser)
